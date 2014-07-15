@@ -4,11 +4,6 @@ module KBaseCommon {
     
     typedef int bool;
     
-    /* An id for a shock node.
-      @id shock
-    */
-    typedef string shock_id;
-    
     /* An ID used for a piece of data at its source.
       @id external
     */
