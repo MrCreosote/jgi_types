@@ -19,43 +19,6 @@ module KBaseCommon {
     */
     typedef string project_id;
     
-    /* A file stored in Shock.
-      id - the id for the shock node
-      type - the file type (e.g. XML, FASTA, GFF)
-      size - the file size in bytes.
-      md5 - the md5 digest of the file.
-      sha1 - the sha1 digest of the file.
-      
-      @optional md5 sha1
-    */
-    typedef structure {
-      shock_id id;
-      string type;
-      int size;
-      string md5;
-      string sha1;
-    } ShockFile;
-    
-    /* A reference to a file stored in Shock.
-      file - the location of and information about a file stored in Shock
-      encoding - the encoding of the file (e.g. UTF8)
-      name - the file name
-      description - a description of the file
-      
-      @optional description
-      @meta ws file.type
-      @meta ws file.size
-      @meta ws encoding
-      @meta ws name
-      @meta ws description
-    */
-    typedef structure {
-      ShockFile file;
-      string encoding;
-      string name;
-      string description;
-    } FileRef;
-    
     /* Information about the source of a piece of data.
       source - the name of the source (e.g. NCBI, JGI, Swiss-Prot)
       source_id - the ID of the data at the source
@@ -111,7 +74,7 @@ module KBaseCommon {
       string genus;
       string species;
       string strain;
-      string organelle
+      string organelle;
       SourceInfo source;
       int ncbi_taxid;
       Location location;
