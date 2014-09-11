@@ -21,7 +21,7 @@ module KBaseFile {
       remote_md5 - the md5 digest of the file.
       remote_sha1 - the sha1 digest of the file.
     
-      @optional file_name, remote_md5, remote_sha1
+      @optional file_name remote_md5 remote_sha1
     */
     typedef structure {
       handle_id hid;
@@ -208,7 +208,7 @@ module KBaseFile {
       int scaffold_N50;
       int scaffold_L50;
       int contig_N50;
-      int contif_L50;
+      int contig_L50;
 
       list<pairedlib_id> pairedlibs;
       list<singlelib_id> singlelibs;
