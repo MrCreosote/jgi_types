@@ -1,24 +1,24 @@
 /* Common types that may be reused in multiple other modules.
 */
 module KBaseCommon {
-    
+
     typedef int bool;
-    
+
     /* An ID used for a piece of data at its source.
       @id external
     */
     typedef string source_id;
-    
+
     /* An ID used for a project encompassing a piece of data at its source.
       @id external
     */
     typedef string project_id;
-    
+
     /* Information about the source of a piece of data.
       source - the name of the source (e.g. NCBI, JGI, Swiss-Prot)
       source_id - the ID of the data at the source
       project_id - the ID of a project encompassing the data at the source
-      
+
       @optional source source_id project_id
     */
     typedef structure {
@@ -39,13 +39,13 @@ module KBaseCommon {
           collection), expressed in the format YYYY-MM-DDThh:mm:ss.SSSZ
       description - a free text description of the location and, if applicable,
           the associated event.
-    
+
       @optional date description
     */
     typedef structure {
-      int lat;
-      int lon;
-      int elevation;
+      float lat;
+      float lon;
+      float elevation;
       string date;
       string description;
     } Location;
@@ -61,7 +61,7 @@ module KBaseCommon {
           mitochondria)
       ncbi_taxid - the NCBI taxonomy ID of the strain
       location - the location from which the strain was collected
-      
+
       @optional genetic_code source ncbi_taxid organelle location
     */
     typedef structure {
