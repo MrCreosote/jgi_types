@@ -6,45 +6,52 @@ module KBaseFile {
 
     typedef int bool;
     
-    /* An id for a shock node.
-      @id shock
+    /* A handle id from the Handle Service for a shock node.
+      @id handle
     */
-    typedef string shock_id;
-    
-    /* A file stored in Shock.
+    typedef string handle_id;
+
+    /* A handle for a file stored in Shock.
+      hid - the id of the handle in the Handle Service that references this
+         shock node
       id - the id for the shock node
-      type - the file type (e.g. XML, FASTA, GFF)
-      size - the file size in bytes.
-      md5 - the md5 digest of the file.
-      sha1 - the sha1 digest of the file.
-      
-      @optional md5 sha1
+      url - the url of the shock server
+      type - the type of the handle. This should always be ‘shock’.
+      file_name - the name of the file
+      remote_md5 - the md5 digest of the file.
+      remote_sha1 - the sha1 digest of the file.
+    
+      @optional file_name, remote_md5, remote_sha1
     */
     typedef structure {
-      shock_id id;
+      handle_id hid;
+      string file_name;
+      string id;
+      string url;
       string type;
-      int size;
-      string md5;
-      string sha1;
-    } ShockFile;
-    
+      string remote_md5;
+      string remote_sha1;
+    } Handle;
+
     /* A reference to a file stored in Shock.
       file - the location of and information about a file stored in Shock
       encoding - the encoding of the file (e.g. UTF8)
-      name - the file name
+      type - the file type (e.g. XML, FASTA, GFF)
+      size - the file size in bytes.
       description - a description of the file
 
       @optional description
-      @meta ws file.type
-      @meta ws file.size
       @meta ws encoding
       @meta ws name
       @meta ws description
+      @meta ws size
+      @meta ws type
     */
     typedef structure {
-      ShockFile file;
+      Handle file;
       string encoding;
-      string name;
+      string type;
+      int size;
       string description;
     } FileRef;
 
@@ -56,17 +63,17 @@ module KBaseFile {
       source - information about the source of this data
       insert_size_mean - the mean size of the genetic fragments
       insert_size_std_dev - the standard deviation of the size of the genetic
-        fragments
+          fragments
       interleaved - whether the left and right reads are interleaved in a
-        single file
+          single file
       read_orientation_outward - the orientation of the reads. If false or
-        absent, the read directions face each other. Otherwise, the sequencing
-        occurs in in an outward direction from the primer pairs.
+          absent, the read directions face each other. Otherwise, the
+          sequencing occurs in in an outward direction from the primer pairs.
       sequencing_tech - the technology used to sequence the genetic information
       read_count - the number of reads in the this dataset
       read_size - the total size of the reads, in bases
       gc_content - the GC content of the reads.
-     
+
       @optional lib2
       @optional insert_size_mean insert_size_std_dev interleaved
       @optional read_orientation_outward gc_content source
@@ -83,8 +90,8 @@ module KBaseFile {
       @meta ws sequencing_tech
     */
     typedef structure {
-      ShockFile lib1;
-      ShockFile lib2;
+      FileRef lib1;
+      FileRef lib2;
       KBaseCommon.StrainInfo strain;
       KBaseCommon.SourceInfo source;
     
@@ -98,7 +105,7 @@ module KBaseFile {
       int read_size;
       float gc_content;
     } PairedEndLibrary;
-    
+
     /*  A library of single end reads.
       lib - the reads
       strain - information about the genetic source
@@ -107,7 +114,7 @@ module KBaseFile {
       read_count - the number of reads in the this dataset
       read_size - the total size of the reads, in bases
       gc_content - the GC content of the reads.
-    
+
       @optional gc_content source
       @meta ws strain.genus
       @meta ws strain.species
@@ -122,16 +129,16 @@ module KBaseFile {
       @meta ws sequencing_tech
     */
     typedef structure {
-      ShockFile lib;
+      FileRef lib;
       KBaseCommon.StrainInfo strain;
       KBaseCommon.SourceInfo source;
-
+    
       string sequencing_tech;
       int read_count;
       int read_size;
       float gc_content;
     } SingleEndLibrary;
-    
+
     /* A workspace id for a paired end library.
       @id ws KBaseFile.PairedEndLibrary
     */
@@ -150,16 +157,29 @@ module KBaseFile {
       assembly_file - the assembly
       strain - information about the genetic source
       source - information about the source of this data
-      size - the total size of the assembly, in bases
-      gc_content - the GC content of the assembly
+      size - the total estimated size of the genome, in bases
+      gc_content - the overall GC content of the assembly
       contigs - the number of contigs in the assembly
       pairedlibs - references to the paired end libraries used to construct
           this assembly
       singlelibs - references to the single end libraries used to construct
           this assembly
-    
+      assembler - the assembler program used to create the assembly file
+      assembler_version - the version of the assembler
+      assembler_parameters - the parameters provided to the assembler
+      scaffold_gap_pct - the percentage of bases in scaffolds that are gap
+          characters
+      scaffold_N50 - the N50 value for the scaffolds
+      scaffold_L50 - the L50 value for the scaffolds
+      contig_N50 - the N50 value for the contigs
+      contig_L50 - the L50 value for the contigs
+
       @optional gc_content source
       @optional pairedlibs singlelibs
+      @optional assembler assembler_version assembler_parameters
+      @optional scaffold_gap_pct
+      @optional scaffold_N50 scaffold_L50 contig_N50 contig_L50
+      
       @meta ws strain.genus
       @meta ws strain.species
       @meta ws strain.strain
@@ -170,30 +190,37 @@ module KBaseFile {
       @meta ws size
       @meta ws contigs
       @meta ws gc_content
-    
-      TODO: What assembly parameters can we store? Need JGI and the Assembly
-          team’s help here.
     */
     typedef structure {
-      ShockFile assembly_file;
+      FileRef assembly_file;
       KBaseCommon.StrainInfo strain;
       KBaseCommon.SourceInfo source;
-    
+
       int size;
       int gc_content;
       int contigs;
-     
+
+      string assembler;
+      string assembler_version;
+      string assembler_parameters;
+
+      float scaffold_gap_pct;
+      int scaffold_N50;
+      int scaffold_L50;
+      int contig_N50;
+      int contif_L50;
+
       list<pairedlib_id> pairedlibs;
       list<singlelib_id> singlelibs;
     } AssemblyFile;
-    
+
     /* A workspace id for an assembly file.
       @id ws KBaseFile.AssemblyFile
     */
     typedef string assembly_id;
-    
+
     /* A type for a DNA feature.
-    
+
       CDS - A coding sequence of DNA, e.g. a protein encoding gene
       locus - a gene with potentially many mRNAs and CDSs
       mRNA - messenger RNA
@@ -215,18 +242,19 @@ module KBaseFile {
       pathis - a pathogenicity island
     */
     typedef string dna_feature_type;
-    
+
     /* A file containing annotation data.
       Note it is *strongly* recommended to include the assembly id, but the
       field is optional since for some data sources the mapping is not
       maintained.
-    
+
       annotation_file - the annotation file
       strain - information about the genetic source
       source - information about the source of this data
       features_by_type - the count of features by the type of the feature
-      assembly_id - a reference to the assembly used to construct this annotation.
-    
+      assembly_id - a reference to the assembly used to construct this
+          annotation.
+
       @optional source
       @optional assembly
       @optional features_by_type
@@ -239,13 +267,12 @@ module KBaseFile {
       @meta ws source.project_id
     */
     typedef structure {
-      ShockFile annotation_file;
+      FileRef annotation_file;
       KBaseCommon.StrainInfo strain;
       KBaseCommon.SourceInfo source;
-    
+
       mapping<dna_feature_type, int> features_by_type;
-    
+
       assembly_id assembly;
     } AnnotationFile;
 };
-
