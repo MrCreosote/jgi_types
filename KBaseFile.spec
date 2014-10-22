@@ -41,11 +41,11 @@ module KBaseFile {
       description - a description of the file
 
       @optional description
-      @meta ws encoding
-      @meta ws name
-      @meta ws description
-      @meta ws size
-      @meta ws type
+      @metadata ws encoding
+      @metadata ws name
+      @metadata ws description
+      @metadata ws size
+      @metadata ws type
     */
     typedef structure {
       Handle file;
@@ -77,17 +77,17 @@ module KBaseFile {
       @optional lib2
       @optional insert_size_mean insert_size_std_dev interleaved
       @optional read_orientation_outward gc_content source
-      @meta ws strain.genus
-      @meta ws strain.species
-      @meta ws strain.strain
-      @meta ws strain.ncbi_taxid
-      @meta ws source.source
-      @meta ws source.source_id
-      @meta ws source.project_id
-      @meta ws read_count
-      @meta ws read_size
-      @meta ws gc_content
-      @meta ws sequencing_tech
+      @metadata ws strain.genus
+      @metadata ws strain.species
+      @metadata ws strain.strain
+      @metadata ws strain.ncbi_taxid
+      @metadata ws source.source
+      @metadata ws source.source_id
+      @metadata ws source.project_id
+      @metadata ws read_count
+      @metadata ws read_size
+      @metadata ws gc_content
+      @metadata ws sequencing_tech
     */
     typedef structure {
       FileRef lib1;
@@ -116,17 +116,17 @@ module KBaseFile {
       gc_content - the GC content of the reads.
 
       @optional gc_content source
-      @meta ws strain.genus
-      @meta ws strain.species
-      @meta ws strain.strain
-      @meta ws strain.ncbi_taxid
-      @meta ws source.source
-      @meta ws source.source_id
-      @meta ws source.project_id
-      @meta ws read_count
-      @meta ws read_size
-      @meta ws gc_content
-      @meta ws sequencing_tech
+      @metadata ws strain.genus
+      @metadata ws strain.species
+      @metadata ws strain.strain
+      @metadata ws strain.ncbi_taxid
+      @metadata ws source.source
+      @metadata ws source.source_id
+      @metadata ws source.project_id
+      @metadata ws read_count
+      @metadata ws read_size
+      @metadata ws gc_content
+      @metadata ws sequencing_tech
     */
     typedef structure {
       FileRef lib;
@@ -180,16 +180,16 @@ module KBaseFile {
       @optional scaffold_gap_pct
       @optional scaffold_N50 scaffold_L50 contig_N50 contig_L50
       
-      @meta ws strain.genus
-      @meta ws strain.species
-      @meta ws strain.strain
-      @meta ws strain.ncbi_taxid
-      @meta ws source.source
-      @meta ws source.source_id
-      @meta ws source.project_id
-      @meta ws size
-      @meta ws contigs
-      @meta ws gc_content
+      @metadata ws strain.genus
+      @metadata ws strain.species
+      @metadata ws strain.strain
+      @metadata ws strain.ncbi_taxid
+      @metadata ws source.source
+      @metadata ws source.source_id
+      @metadata ws source.project_id
+      @metadata ws size
+      @metadata ws contigs
+      @metadata ws gc_content
     */
     typedef structure {
       FileRef assembly_file;
@@ -258,13 +258,13 @@ module KBaseFile {
       @optional source
       @optional assembly
       @optional features_by_type
-      @meta ws strain.genus
-      @meta ws strain.species
-      @meta ws strain.strain
-      @meta ws strain.ncbi_taxid
-      @meta ws source.source
-      @meta ws source.source_id
-      @meta ws source.project_id
+      @metadata ws strain.genus
+      @metadata ws strain.species
+      @metadata ws strain.strain
+      @metadata ws strain.ncbi_taxid
+      @metadata ws source.source
+      @metadata ws source.source_id
+      @metadata ws source.project_id
     */
     typedef structure {
       FileRef annotation_file;
