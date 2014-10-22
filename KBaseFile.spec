@@ -42,7 +42,6 @@ module KBaseFile {
 
       @optional description
       @metadata ws encoding
-      @metadata ws name
       @metadata ws description
       @metadata ws size
       @metadata ws type
