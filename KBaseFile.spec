@@ -72,10 +72,13 @@ module KBaseFile {
       read_count - the number of reads in the this dataset
       read_size - the total size of the reads, in bases
       gc_content - the GC content of the reads.
+      single_genome - true or missing if the reads are from a single genome.
+          False if the reads are from a metagenome.
 
       @optional lib2
       @optional insert_size_mean insert_size_std_dev interleaved
-      @optional read_orientation_outward gc_content source
+      @optional read_orientation_outward gc_content source strain
+      @optional read_size read_count single_genome
       @metadata ws strain.genus
       @metadata ws strain.species
       @metadata ws strain.strain
@@ -87,6 +90,7 @@ module KBaseFile {
       @metadata ws read_size
       @metadata ws gc_content
       @metadata ws sequencing_tech
+      @metadata ws single_genome
     */
     typedef structure {
       FileRef lib1;
@@ -98,6 +102,7 @@ module KBaseFile {
       float insert_size_std_dev;
       bool interleaved;
       bool read_orientation_outward;
+      bool single_genome;
      
       string sequencing_tech;
       int read_count;
@@ -113,8 +118,10 @@ module KBaseFile {
       read_count - the number of reads in the this dataset
       read_size - the total size of the reads, in bases
       gc_content - the GC content of the reads.
+      single_genome - true or missing if the reads are from a single genome.
+          False if the reads are from a metagenome.
 
-      @optional gc_content source
+      @optional gc_content source strain read_count read_size single_genome
       @metadata ws strain.genus
       @metadata ws strain.species
       @metadata ws strain.strain
@@ -126,12 +133,14 @@ module KBaseFile {
       @metadata ws read_size
       @metadata ws gc_content
       @metadata ws sequencing_tech
+      @metadata ws single_genome
     */
     typedef structure {
       FileRef lib;
       KBaseCommon.StrainInfo strain;
       KBaseCommon.SourceInfo source;
-    
+
+      bool single_genome;
       string sequencing_tech;
       int read_count;
       int read_size;
