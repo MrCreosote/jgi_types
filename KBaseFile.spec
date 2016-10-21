@@ -74,11 +74,23 @@ module KBaseFile {
       gc_content - the GC content of the reads.
       single_genome - true or missing if the reads are from a single genome.
           False if the reads are from a metagenome.
+      read_length_mean - The average read length size
+      read_length_stdev - The standard deviation read lengths
+      phred_type - The scale of phred scores
+      number_of_duplicates - The number of reads that are duplicates
+      qual_min - min quality scores
+      qual_max - max quality scores
+      qual_mean - mean quality scores
+      qual_stdev - stdev of quality scores
+      base_percentages - The per base percentage breakdown
 
       @optional lib2
       @optional insert_size_mean insert_size_std_dev interleaved
       @optional read_orientation_outward gc_content source strain
       @optional read_size read_count single_genome
+      @optional read_length_mean read_length_stdev phred_type
+      @optional number_of_duplicates qual_min qual_max
+      @optional qual_mean qual_stdev base_percentages
       @metadata ws strain.genus
       @metadata ws strain.species
       @metadata ws strain.strain
@@ -91,6 +103,14 @@ module KBaseFile {
       @metadata ws gc_content
       @metadata ws sequencing_tech
       @metadata ws single_genome
+      @metadata ws read_length_mean
+      @metadata ws read_length_stdev
+      @metadata ws phred_type
+      @metadata ws number_of_duplicates
+      @metadata ws qual_min
+      @metadata ws qual_max
+      @metadata ws qual_mean
+      @metadata ws qual_stdev
     */
     typedef structure {
       FileRef lib1;
@@ -108,6 +128,15 @@ module KBaseFile {
       int read_count;
       int read_size;
       float gc_content;
+      float read_length_mean;
+      float read_length_stdev;
+      string phred_type;
+      int number_of_duplicates;
+      float qual_min;
+      float qual_max;
+      float qual_mean;
+      float qual_stdev;
+      mapping<string, float> base_percentages;
     } PairedEndLibrary;
 
     /*  A library of single end reads.
@@ -120,8 +149,20 @@ module KBaseFile {
       gc_content - the GC content of the reads.
       single_genome - true or missing if the reads are from a single genome.
           False if the reads are from a metagenome.
+      read_length_mean - The average read length size
+      read_length_stdev - The standard deviation read lengths
+      phred_type - The scale of phred scores
+      number_of_duplicates - The number of reads that are duplicates
+      qual_min - min quality scores
+      qual_max - max quality scores
+      qual_mean - mean quality scores
+      qual_stdev - stdev of quality scores
+      base_percentages - The per base percentage breakdown
 
       @optional gc_content source strain read_count read_size single_genome
+      @optional read_length_mean read_length_stdev phred_type
+      @optional number_of_duplicates qual_min qual_max
+      @optional qual_mean qual_stdev base_percentages
       @metadata ws strain.genus
       @metadata ws strain.species
       @metadata ws strain.strain
@@ -134,6 +175,14 @@ module KBaseFile {
       @metadata ws gc_content
       @metadata ws sequencing_tech
       @metadata ws single_genome
+      @metadata ws read_length_mean
+      @metadata ws read_length_stdev
+      @metadata ws phred_type
+      @metadata ws number_of_duplicates
+      @metadata ws qual_min
+      @metadata ws qual_max
+      @metadata ws qual_mean
+      @metadata ws qual_stdev
     */
     typedef structure {
       FileRef lib;
@@ -145,6 +194,15 @@ module KBaseFile {
       int read_count;
       int read_size;
       float gc_content;
+      float read_length_mean;
+      float read_length_stdev;
+      string phred_type;
+      int number_of_duplicates;
+      float qual_min;
+      float qual_max;
+      float qual_mean;
+      float qual_stdev;
+      mapping<string, float> base_percentages;
     } SingleEndLibrary;
 
     /* A workspace id for a paired end library.
